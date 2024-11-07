@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 #container {
   height: 80vh;
   width: 100vw;
@@ -5,12 +9,12 @@
   align-items: center;
   display: flex;
   justify-content: center;
+  user-select: none;
 }
 
 #board {
   height: 450px;
   width: 450px;
-  border: 1px solid grey;
 }
 
 .row {

@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/footer.css";
-import { useTilesContext } from "../context/TilesContext";
+import { useTilesContext } from "../customHooks/TilesContext";
 
 function Footer() {
   const { tiles } = useTilesContext();
