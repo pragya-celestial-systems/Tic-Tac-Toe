@@ -1,0 +1,24 @@
+#nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+  padding-top: 1rem;
+}
+
+.btn {
+  background-color: cadetblue;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0.7rem;
+  border: none;
+  font-size: 1.2rem;
+  height: 50px;
+  width: 50px;
+}
+
+#currentPlayer {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
