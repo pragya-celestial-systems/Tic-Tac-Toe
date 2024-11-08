@@ -1,0 +1,40 @@
+#overlay {
+  height: 100vh;
+  width: 100svw;
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#resultContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: lightgrey;
+  height: 300px;
+  padding: 3rem;
+}
+
+#resultHeading {
+  font-size: 3rem;
+}
+
+#playAgainButton {
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid cadetblue;
+  background: cadetblue;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#playAgainButton:hover {
+  background: #379ea1;
+  transition: 0.3s;
+}

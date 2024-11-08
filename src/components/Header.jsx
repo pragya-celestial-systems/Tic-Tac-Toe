@@ -2,7 +2,7 @@ import React from "react";
 import "./css/header.css";
 import { usePlayerContext } from "../customHooks/PlayerContext";
 
-function Navbar() {
+function Header() {
   const { winner, currentPlayer } = usePlayerContext();
 
   return (
@@ -11,7 +11,9 @@ function Navbar() {
         <i className="fa-solid fa-bars"></i>
       </button>
       <div id="currentPlayer">
-        {winner ? `${winner} won the game! 🎉` : currentPlayer}
+        {winner
+          ? `${winner === "⭕️" ? "Player 1" : "Player 2"} won the game! 🎉`
+          : `${currentPlayer} Turn`}
       </div>
       <button className="btn">
         <i className="fa-solid fa-gear"></i>
@@ -20,4 +22,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Header;

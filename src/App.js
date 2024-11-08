@@ -1,5 +1,5 @@
 import "./App.css";
-import Navbar from "./components/Header";
+import Header from "./components/Header";
 import Board from "./components/Board";
 import Footer from "./components/Footer";
 import { TilesContextProvider } from "./customHooks/TilesContext";
@@ -9,7 +9,7 @@ function App() {
   return (
     <PlayerContextProvider>
       <TilesContextProvider>
-        <Navbar />
+        <Header />
         <Board />
         <Footer />
       </TilesContextProvider>
