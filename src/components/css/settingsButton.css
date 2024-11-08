@@ -53,3 +53,7 @@
 .fa-square-check {
   margin-right: 5px;
 }
+
+.settings-sidebar-option {
+  cursor: pointer;
+}

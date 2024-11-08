@@ -13,7 +13,7 @@ function Board() {
   const [tiles, setTiles] = useState(initializeCells);
   const [isXturn, setIsXturn] = useState(true);
   const { toggleAudio } = useSettingsContext();
-  console.log(toggleAudio);
+
   const {
     setCurrentPlayer,
     currentPlayer,

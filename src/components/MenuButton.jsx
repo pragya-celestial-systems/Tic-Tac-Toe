@@ -11,10 +11,16 @@ function MenuButton() {
   useEffect(() => {
     function handleClick(e) {
       const menuButton = document.querySelector(".menu-button");
-      if (e.target.closest("button") !== menuButton) {
+      const menuSidebar = document.querySelector(".menu-bar");
+
+      console.log(e.target);
+      if (
+        e.target.closest("button") !== menuButton &&
+        e.target.closest(".menu-bar") !== menuSidebar
+      ) {
         setShowMenu(false);
       }
-    };
+    }
 
     window.addEventListener("click", handleClick);
 

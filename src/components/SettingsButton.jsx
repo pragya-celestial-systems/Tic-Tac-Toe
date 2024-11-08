@@ -3,13 +3,18 @@ import { useSettingsContext } from "../context/SettingsContext";
 import "./css/settingsButton.css";
 
 function SettingsButton() {
-  const [showSidebar, setShowSidebar] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(false);
   const { toggleAudio, setToggleAudio } = useSettingsContext();
 
   useEffect(() => {
     function handleClick(e) {
       const menuButton = document.querySelector("#settingsButton");
-      if (e.target.closest("button") !== menuButton) {
+      const settingsSidebar = document.querySelector(".settings-bar");
+
+      if (
+        e.target.closest("button") !== menuButton &&
+        e.target.closest(".settings-bar") !== settingsSidebar
+      ) {
         setShowSidebar(false);
       }
     }
@@ -45,12 +50,17 @@ function SettingsButton() {
           </div>
           <hr style={{ width: "90%" }} />
           <div className="settings-sidebar-row">
-            {toggleAudio ? (
-              <i className="fa-regular fa-square"></i>
-            ) : (
-              <i className="fa-regular fa-square-check"></i>
-            )}
-            <span onClick={handleToggleAudio}>Mute Audio</span>
+            <div
+              className="settings-sidebar-option"
+              onClick={handleToggleAudio}
+            >
+              {toggleAudio ? (
+                <i className="fa-regular fa-square-check"></i>
+              ) : (
+                <i className="fa-regular fa-square"></i>
+              )}
+              <span className="option">Mute Audio</span>
+            </div>
           </div>
         </div>
       )}
