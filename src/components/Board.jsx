@@ -4,22 +4,16 @@ import plotSymbolSound from "../assets/plot-symbol-sound.mp3";
 import Column from "./Column";
 import Result from "./Result";
 import "./css/board.css";
-import { usePlayerContext } from "../customHooks/PlayerContext";
-import { useTilesContext } from "../customHooks/TilesContext";
+import { usePlayerContext } from "../context/PlayerContext";
+import { useTilesContext } from "../context/TilesContext";
+import { useSettingsContext } from "../context/SettingsContext";
 
 function Board() {
-  const [tiles, setTiles] = useState([
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-  ]);
+  const initializeCells = Array(9).fill(null);
+  const [tiles, setTiles] = useState(initializeCells);
   const [isXturn, setIsXturn] = useState(true);
+  const { toggleAudio } = useSettingsContext();
+  console.log(toggleAudio);
   const {
     setCurrentPlayer,
     currentPlayer,
@@ -36,7 +30,6 @@ function Board() {
 
   useEffect(() => {
     // setIsXturn(currentPlayer === "⭕️ Player" ? true : false);
-    console.log(currentPlayer === "⭕️ Turn" ? true : false);
     const winner = checkWinner();
 
     if (tilesCount >= 9 && !winner) {
@@ -53,12 +46,15 @@ function Board() {
     if (tiles[index] !== null || winner) return;
 
     // pause the sound if already playing
-    if (plotSymbolRef.current.play) {
-      plotSymbolRef.current.pause();
-      plotSymbolRef.current.currentTime = 0;
+    if (!toggleAudio) {
+      if (plotSymbolRef.current.play) {
+        plotSymbolRef.current.pause();
+        plotSymbolRef.current.currentTime = 0;
+      }
+
+      plotSymbolRef.current.play();
     }
 
-    plotSymbolRef.current.play();
     const updatedTiles = [...tiles];
     updatedTiles[index] = isXturn ? "❌" : "⭕️";
     setCurrentPlayer(() => (isXturn ? "⭕️" : "❌"));
@@ -103,7 +99,10 @@ function Board() {
       setPlayer2WinCount((prevCount) => prevCount + 1);
     }
 
-    gameOverRef.current.play();
+    if (!toggleAudio) {
+      gameOverRef.current.play();
+    }
+
     setTimeout(() => {
       setWinner(winner);
       setHasFinished(true);
@@ -114,22 +113,24 @@ function Board() {
   }
 
   function saveWinner(winner) {
-    const player1WinCount = Number(sessionStorage.getItem("player1WinCount"));
-    const player2WinCount = Number(sessionStorage.getItem("player2WinCount"));
-    console.log(winner);
+    const player1WinCount =
+      Number(sessionStorage.getItem("player1WinCount")) || 0;
+    const player2WinCount =
+      Number(sessionStorage.getItem("player2WinCount")) || 0;
 
     if (winner === "⭕️") {
       sessionStorage.setItem("player1WinCount", player1WinCount + 1);
-    } else {
+    } else if (winner === "❌") {
       sessionStorage.setItem("player2WinCount", player2WinCount + 1);
+    } else {
     }
   }
 
   function handleClickPlayAgain() {
     setWinner(null);
-    setTiles([null, null, null, null, null, null, null, null, null]);
     setTilesCount(0);
     setHasFinished(false);
+    setTiles(initializeCells);
     gameOverRef.current.pause();
   }
 

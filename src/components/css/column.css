@@ -5,8 +5,8 @@
 .column {
   height: 150px;
   width: 150px;
-  background: whitesmoke;
-  border: 3px solid white;
+  background: #78b2b4;
+  border: 3px solid cadetblue;
   cursor: pointer;
   display: flex;
   align-items: center;

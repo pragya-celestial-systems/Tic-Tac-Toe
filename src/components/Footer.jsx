@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./css/footer.css";
-import { useTilesContext } from "../customHooks/TilesContext";
-import { usePlayerContext } from "../customHooks/PlayerContext";
+import { useTilesContext } from "../context/TilesContext";
+import { usePlayerContext } from "../context/PlayerContext";
 
 function Footer() {
   const { tilesCount } = useTilesContext();
@@ -15,7 +15,7 @@ function Footer() {
   useEffect(() => {
     setPlayer1WinCount(Number(sessionStorage.getItem("player1WinCount")) || 0);
     setPlayer2WinCount(Number(sessionStorage.getItem("player2WinCount")) || 0);
-  }, []);
+  }, [player1WinCount, player2WinCount]);
 
   return (
     <footer id="footer">

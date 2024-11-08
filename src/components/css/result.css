@@ -14,7 +14,8 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: lightgrey;
+  background: #78b2b4;
+  border: 1px solid cadetblue;
   height: 300px;
   padding: 3rem;
 }
@@ -29,7 +30,6 @@
   border-radius: 8px;
   border: 1px solid cadetblue;
   background: cadetblue;
-  color: white;
   font-weight: 600;
   cursor: pointer;
 }

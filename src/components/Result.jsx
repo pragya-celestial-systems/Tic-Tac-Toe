@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/result.css";
-import { usePlayerContext } from "../customHooks/PlayerContext";
+import { usePlayerContext } from "../context/PlayerContext";
 
 function Result({ onPlayAgain }) {
   const { winner } = usePlayerContext();
