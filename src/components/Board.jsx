@@ -11,10 +11,10 @@ import { useSettingsContext } from "../context/SettingsContext";
 function Board() {
   const initializeCells = Array(9).fill(null);
   const [tiles, setTiles] = useState(initializeCells);
-  const [isXturn, setIsXturn] = useState(true);
   const { toggleAudio } = useSettingsContext();
 
   const {
+    currentPlayer,
     setCurrentPlayer,
     setWinner,
     winner,
@@ -28,7 +28,6 @@ function Board() {
   const plotSymbolRef = useRef();
 
   useEffect(() => {
-    // setIsXturn(currentPlayer === "⭕️ Player" ? true : false);
     const winner = checkWinner();
 
     if (tilesCount >= 9 && !winner) {
@@ -55,11 +54,11 @@ function Board() {
     }
 
     const updatedTiles = [...tiles];
-    updatedTiles[index] = isXturn ? "❌" : "⭕️";
-    setCurrentPlayer(() => (isXturn ? "⭕️" : "❌"));
+    const symbol = currentPlayer === "❌" ? "❌" : "⭕️";
+    updatedTiles[index] = symbol;
+    setCurrentPlayer(() => (symbol === "❌" ? "⭕️" : "❌"));
     setTiles(updatedTiles);
     setTilesCount((prevTilesCount) => prevTilesCount + 1);
-    setIsXturn((prevState) => !prevState);
   }
 
   function checkWinner() {
@@ -83,6 +82,7 @@ function Board() {
         tiles[col2] === tiles[col3]
       ) {
         winner = tiles[col1];
+        console.log(condition);
       }
     });
 
@@ -90,11 +90,12 @@ function Board() {
   }
 
   function displayResult(winner) {
-    if (winner === "⭕️") {
+    let didMatchDraw = false;
+    if (!winner) {
+      didMatchDraw = true;
+    } else if (winner === "⭕️") {
       setPlayer1WinCount((prevCount) => prevCount + 1);
-    }
-
-    if (winner === "❌") {
+    } else if (winner === "❌") {
       setPlayer2WinCount((prevCount) => prevCount + 1);
     }
 
@@ -103,12 +104,18 @@ function Board() {
     }
 
     setTimeout(() => {
-      setWinner(winner);
+      if (!didMatchDraw) {
+        setWinner(winner);
+      } else {
+        setWinner(null);
+      }
       setHasFinished(true);
     }, 500);
 
-    // save the winner in the session storage
-    saveWinner(winner);
+    // if winner, save the winner in the session storage
+    if (!didMatchDraw) {
+      saveWinner(winner);
+    }
   }
 
   function saveWinner(winner) {

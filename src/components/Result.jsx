@@ -13,7 +13,11 @@ function Result({ onPlayAgain }) {
           <h1 id="resultHeading">Match Draw!!!</h1>
         ) : (
           <h1 id="resultHeading">
-            {winner === "⭕️" ? "⭕️ Player 1" : "❌ Player 2"} won the match.
+            {winner
+              ? winner === "⭕️"
+                ? "⭕️ Player 1 won the match."
+                : "❌ Player 2 won the match."
+              : "Match Draw! No one won the game."}
           </h1>
         )}
         <button id="playAgainButton" onClick={() => onPlayAgain()}>
