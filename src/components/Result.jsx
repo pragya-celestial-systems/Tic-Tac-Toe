@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import "./css/result.css";
 import { usePlayerContext } from "../context/PlayerContext";

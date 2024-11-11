@@ -10,15 +10,18 @@
 }
 
 .menu-bar {
-  display: flex;
+  display: block;
   height: 100vh;
-  width: 300px;
+  /* width: 300px; */
+  width: 0;
+  overflow: hidden;
   background-color: #78b2b4;
   position: absolute;
   top: 0;
   left: 0;
   flex-direction: column;
   border-right: 1px solid cadetblue;
+  opacity: 0;
 }
 
 #closeButtonContainer {
@@ -47,4 +50,16 @@
 
 .menu-sidebar-row > span {
   cursor: pointer;
+}
+
+.active-menubar {
+  width: 300px;
+  transition: 0.4s;
+  opacity: 1;
+}
+
+.unactive-menubar {
+  width: 0;
+  transition: 0.4s;
+  opacity: 0;
 }

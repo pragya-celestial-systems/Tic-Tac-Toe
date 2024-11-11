@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Board from "./components/Board";
@@ -10,13 +10,13 @@ import { SettingsContextProvider } from "./context/SettingsContext";
 function App() {
   return (
     <SettingsContextProvider>
-    <PlayerContextProvider>
-      <TilesContextProvider>
-        <Header />
-        <Board />
-        <Footer />
-      </TilesContextProvider>
-    </PlayerContextProvider>
+      <PlayerContextProvider>
+        <TilesContextProvider>
+          <Header />
+          <Board />
+          <Footer />
+        </TilesContextProvider>
+      </PlayerContextProvider>
     </SettingsContextProvider>
   );
 }

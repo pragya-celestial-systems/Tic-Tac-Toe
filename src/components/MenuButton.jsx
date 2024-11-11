@@ -4,21 +4,20 @@ import { useTilesContext } from "../context/TilesContext";
 import { usePlayerContext } from "../context/PlayerContext";
 
 function MenuButton() {
-  const [showMenu, setShowMenu] = useState(false);
   const { setTiles, setTilesCount } = useTilesContext();
   const { setPlayer1WinCount, setPlayer2WinCount } = usePlayerContext();
+  const [menuClass, setMenuClass] = useState("unactive-menubar");
 
   useEffect(() => {
     function handleClick(e) {
       const menuButton = document.querySelector(".menu-button");
       const menuSidebar = document.querySelector(".menu-bar");
 
-      console.log(e.target);
       if (
         e.target.closest("button") !== menuButton &&
         e.target.closest(".menu-bar") !== menuSidebar
       ) {
-        setShowMenu(false);
+        setMenuClass("unactive-menubar");
       }
     }
 
@@ -30,11 +29,11 @@ function MenuButton() {
   }, []);
 
   function handleDisplaySidebar() {
-    setShowMenu(true);
+    setMenuClass("active-menubar");
   }
 
   function handleHideSidebar() {
-    setShowMenu(false);
+    setMenuClass("unactive-menubar");
   }
 
   function handleResetGame() {
@@ -55,17 +54,15 @@ function MenuButton() {
       >
         <i className="fa-solid fa-bars"></i>
       </button>
-      {showMenu && (
-        <div className="menu-bar">
-          <div id="closeButtonContainer" onClick={handleHideSidebar}>
-            <i className="fa-solid fa-xmark"></i>
-          </div>
-          <hr style={{ width: "90%" }} />
-          <div className="menu-sidebar-row">
-            <span onClick={handleResetGame}>Reset Game</span>
-          </div>
+      <div className={`menu-bar ${menuClass}`}>
+        <div id="closeButtonContainer" onClick={handleHideSidebar}>
+          <i className="fa-solid fa-xmark"></i>
         </div>
-      )}
+        <hr style={{ width: "90%" }} />
+        <div className="menu-sidebar-row">
+          <span onClick={handleResetGame}>Reset Game</span>
+        </div>
+      </div>
     </>
   );
 }

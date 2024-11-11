@@ -16,7 +16,6 @@ function Board() {
 
   const {
     setCurrentPlayer,
-    currentPlayer,
     setWinner,
     winner,
     setPlayer1WinCount,
@@ -122,7 +121,6 @@ function Board() {
       sessionStorage.setItem("player1WinCount", player1WinCount + 1);
     } else if (winner === "❌") {
       sessionStorage.setItem("player2WinCount", player2WinCount + 1);
-    } else {
     }
   }
 

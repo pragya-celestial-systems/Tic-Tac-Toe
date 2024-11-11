@@ -3,7 +3,7 @@ import { useSettingsContext } from "../context/SettingsContext";
 import "./css/settingsButton.css";
 
 function SettingsButton() {
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [settingsClass, setSettingsClass] = useState("unactive-sidebar");
   const { toggleAudio, setToggleAudio } = useSettingsContext();
 
   useEffect(() => {
@@ -15,7 +15,7 @@ function SettingsButton() {
         e.target.closest("button") !== menuButton &&
         e.target.closest(".settings-bar") !== settingsSidebar
       ) {
-        setShowSidebar(false);
+        setSettingsClass("unactive-sidebar");
       }
     }
 
@@ -27,11 +27,11 @@ function SettingsButton() {
   }, []);
 
   function handleShowSidebar() {
-    setShowSidebar(true);
+    setSettingsClass("active-sidebar");
   }
 
   function handleHideSidebar() {
-    setShowSidebar(false);
+    setSettingsClass("unactive-sidebar");
   }
 
   function handleToggleAudio() {
@@ -43,27 +43,22 @@ function SettingsButton() {
       <button id="settingsButton" onClick={handleShowSidebar}>
         <i className="fa-solid fa-gear"></i>
       </button>
-      {showSidebar && (
-        <div className="settings-bar">
-          <div id="closeButtonContainer" onClick={handleHideSidebar}>
-            <i className="fa-solid fa-xmark"></i>
-          </div>
-          <hr style={{ width: "90%" }} />
-          <div className="settings-sidebar-row">
-            <div
-              className="settings-sidebar-option"
-              onClick={handleToggleAudio}
-            >
-              {toggleAudio ? (
-                <i className="fa-regular fa-square-check"></i>
-              ) : (
-                <i className="fa-regular fa-square"></i>
-              )}
-              <span className="option">Mute Audio</span>
-            </div>
+      <div className={`settings-bar ${settingsClass}`}>
+        <div id="closeButtonContainer" onClick={handleHideSidebar}>
+          <i className="fa-solid fa-xmark"></i>
+        </div>
+        <hr style={{ width: "90%" }} />
+        <div className="settings-sidebar-row">
+          <div className="settings-sidebar-option" onClick={handleToggleAudio}>
+            {toggleAudio ? (
+              <i className="fa-regular fa-square-check"></i>
+            ) : (
+              <i className="fa-regular fa-square"></i>
+            )}
+            <span className="option">Mute Audio</span>
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 }
