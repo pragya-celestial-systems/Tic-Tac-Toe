@@ -10,7 +10,7 @@ import { useSettingsContext } from "../context/SettingsContext";
 
 function Board() {
   const initializeCells = Array(9).fill(null);
-  const [tiles, setTiles] = useState(initializeCells);
+  // const [tiles, setTiles] = useState(initializeCells);
   const { toggleAudio } = useSettingsContext();
 
   const {
@@ -23,10 +23,11 @@ function Board() {
   } = usePlayerContext();
 
   const [hasFinished, setHasFinished] = useState(false);
-  const { setTilesCount, tilesCount } = useTilesContext();
+  const { setTilesCount, tilesCount, tiles, setTiles } = useTilesContext();
   const gameOverRef = useRef();
   const plotSymbolRef = useRef();
 
+  console.log(tiles);
   useEffect(() => {
     const winner = checkWinner();
 
@@ -41,7 +42,9 @@ function Board() {
   }, [tiles, setWinner]);
 
   function handleAddSymbol(index) {
-    if (tiles[index] !== null || winner) return;
+    if (tiles[index] !== null || winner) {
+      return;
+    }
 
     // pause the sound if already playing
     if (!toggleAudio) {
@@ -82,7 +85,6 @@ function Board() {
         tiles[col2] === tiles[col3]
       ) {
         winner = tiles[col1];
-        console.log(condition);
       }
     });
 
