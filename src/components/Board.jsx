@@ -10,7 +10,6 @@ import { useSettingsContext } from "../context/SettingsContext";
 
 function Board() {
   const initializeCells = Array(9).fill(null);
-  // const [tiles, setTiles] = useState(initializeCells);
   const { toggleAudio } = useSettingsContext();
 
   const {
@@ -27,7 +26,6 @@ function Board() {
   const gameOverRef = useRef();
   const plotSymbolRef = useRef();
 
-  console.log(tiles);
   useEffect(() => {
     const winner = checkWinner();
 
