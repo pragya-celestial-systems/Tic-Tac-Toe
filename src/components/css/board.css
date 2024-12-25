@@ -27,3 +27,15 @@
   width: 100%;
   border-top: 3px solid red;
 }
+
+
+@media screen and (max-width: 480px) {
+  #board {
+    width: 320px;
+    height: 320px;
+  }
+
+  .row {
+    height: 120px;
+  }
+}
